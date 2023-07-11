@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 struct Section {
     let options: [SettingsOptionType]
@@ -37,26 +38,34 @@ class ViewController: UIViewController {
     
     private var models = [Section]()
 
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
-        table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
-
-        return table
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+        tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCells()
         setupViews()
+        setupConstraints()
+        setupCells()
     }
+    
+//    MARK: - Setups
     
     private func setupViews() {
         title = "Настройки"
+        view.backgroundColor = .systemBackground
         view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.frame = view.bounds
+    }
+    
+    private func setupConstraints() {
+        tableView.snp.makeConstraints { make in
+            make.top.trailing.bottom.leading.equalTo(view)
+        }
     }
     
     private func setupCells() {
