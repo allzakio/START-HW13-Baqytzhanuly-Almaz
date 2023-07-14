@@ -10,7 +10,7 @@ import UIKit
 class SwitchTableViewCell: UITableViewCell {
     static let identifier = "SwitchTableViewCell"
     
-//    MARK: - UI Elements
+//    MARK: - UI
     
     private lazy var iconContainerView: UIView = {
         let view = UIView()
@@ -98,7 +98,7 @@ class SwitchTableViewCell: UITableViewCell {
         settingSwitch.isOn = false
     }
     
-    public func configure(with model: SettingsSwitchOption) {
+    public func configure(with model: SwitchOption) {
         iconContainerView.backgroundColor = model.iconBackgroundColor
         iconImageView.image = model.icon
         title.text = model.title

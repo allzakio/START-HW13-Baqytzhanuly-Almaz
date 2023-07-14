@@ -11,7 +11,7 @@ import SnapKit
 class SettingTableViewCell: UITableViewCell {
     static let identifier = "SettingTableViewCell"
     
-//    MARK: - UI Elements
+//    MARK: - UI
     
     private lazy var iconContainerView: UIView = {
         let view = UIView()
@@ -96,7 +96,7 @@ class SettingTableViewCell: UITableViewCell {
         rightLabel.text = nil
     }
     
-    public func configure(with model: SettingsOption) {
+    public func configure(with model: BasicOption) {
         iconContainerView.backgroundColor = model.iconBackgroundColor
         iconImageView.image = model.icon
         title.text = model.title
